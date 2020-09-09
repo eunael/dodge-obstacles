@@ -155,6 +155,9 @@ function desenha(){
     } else if (estadoAtual == estado.perdeu){
         contexto.fillStyle = 'red'
         contexto.fillRect(LARGURA/2-25, ALTURA/2-25, 50, 50)
+        contexto.fillStyle = "white"
+        contexto.font = "30px Arial"
+        contexto.fillText(`Pontuação: ${obstaculos.pontos}`, 10, 40)
     }
     
 }
