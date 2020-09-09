@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		canvas {
+			position: absolute;
+			top: 0px;
+			bottom: 0px;
+			left: 0px;
+			right: 0px;
+			margin: auto;
+		}
+	</style>
+</head>
+<body></body>
+	<script>
+		let canvas, contexto, frame=0, velocidade=2;
+		var bloco = {
+			// pos = 0 a 400
+			posx: 0,
+			posy: 0,
+			
+			larg: 25,
+			alt: 25,
+			
+			cor: '#606060',
+			
+			atuliBloco: function(x4, y4){
+				contx = this.posx + x4
+				conty = this.posy + y4
+				if (x4==0 && y4==0){
+					this.posx = 0
+					this.posy = 0
+				} else{
+					if (contx==450 || contx==-25){
+						
+					}else {
+						this.posx += x4
+					}
+
+					if (conty==450 || conty==-25){
+						
+					}else {
+						this.posy += y4
+					}
+				}
+			},
+			desenBloco: function(){
+				contexto.fillStyle = '#b3b3b3'
+				contexto.fillRect(this.posx, this.posy, this.larg, this.alt)
+			}
+		}
+		obstaculos = {
+            _obs: [],
+            tempoInsere: 0,
+
+            insere: function(){
+                this._obs.push({
+                    posx: 35+Math.floor(Math.random()*(400-35)),
+                    posy: 0,
+                    altura: 10+Math.floor(Math.random()*(30-10)),
+                    largura: 35+Math.floor(Math.random()*(60-35)),
+                })
+                this.tempoInsere = 30 + Math.floor(30 * Math.random())
+            },
+
+            atualiObst: function() {
+                if (this.tempoInsere == 0){
+                    this.insere()
+                } else {
+                    this.tempoInsere--
+                }
+                let tam = this._obs.length
+                for (var i=0; i<tam; i++){
+                    let obs = this._obs[i]
+                    if (obs.posy >= (450+obs.altura)){
+                        this._obs.splice(i, 1)
+                        tam --
+                        i--
+                    } else{
+                        obs.posy += velocidade
+                    }
+                }
+            },
+            desenhaObst: function(){
+                let tam = this._obs.length
+                for (var i=0; i<tam; i++){
+                    var obs = this._obs[i]
+                    contexto.fillStyle = "#ffffff"
+                    contexto.fillRect(obs.posx, obs.posy, obs.largura, obs.altura)
+                }
+                
+            }
+        }
+		
+		function atualiza(x3, y3){
+			let x4=x3, y4=y3;				
+			frame++
+			bloco.atuliBloco(x4, y4)
+			obstaculos.atualiObst()
+		}
+		function desenha(){
+			contexto.fillStyle = '#16161d'
+			contexto.fillRect(0,0,450,450)
+			bloco.desenBloco()
+			obstaculos.desenhaObst()
+		}
+		function roda(x2, y2){
+			let x3=x2, y3=y2;
+			atualiza(x3, y3)
+			desenha()
+			// window.requestAnimationFrame(roda)
+		}
+		function main(x, y){
+			let x2=x, y2=y;
+			canvas = document.createElement('canvas')
+			canvas.width = 450
+			canvas.height = 450
+			
+			contexto = canvas.getContext("2d")
+			
+			document.body.appendChild(canvas)
+			// document.addEventListener("mousedown", clique)
+			roda(x2, y2)
+			console.log('desenahdo')
+		}
+		//main()
+		document.addEventListener('keypress', (event) => {
+			var tecla = event.keyCode
+			if (tecla==13){
+				// ENTER
+				main(0,0)
+			} else if(tecla==97){
+				// ESQUERDA
+				// letra A
+				main(-25,0)
+			} else if(tecla==119){
+				// CIMA
+				// letra W
+				main(0,-25)
+			} else if(tecla==100){
+				// DIREITA
+				// letra D
+				main(25,0)
+			} else if(tecla==115){
+				// BAIXO
+				// letra S
+				main(0,25)	
+			}
+		})
+	</script>
+</body>
