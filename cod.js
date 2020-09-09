@@ -22,8 +22,6 @@ var bloco = {
         paray = this.posy + this.conty
         
         if(parax>-1 && parax <= LARGURA-this.larg){
-        //parax<=-1 || parax+this.larg>= LARGURA+this.contx-1
-            // DIREITA || ESQUERDA
             this.posx += this.contx
         }else{
             
@@ -157,7 +155,6 @@ function desenha(){
     } else if (estadoAtual == estado.perdeu){
         contexto.fillStyle = 'red'
         contexto.fillRect(LARGURA/2-25, ALTURA/2-25, 50, 50)
-        //console.log(obstaculos.pontos)
     }
     
 }
@@ -203,6 +200,4 @@ function main(){
     console.log('desenahdo')
 }
 
-export default function chamMain(){
-    main()
-}
+main()
