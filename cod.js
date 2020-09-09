@@ -21,13 +21,13 @@ var bloco = {
         parax = this.posx + this.contx
         paray = this.posy + this.conty
         
-        if(parax<=0 || parax+this.larg >= LARGURA){
+        if(parax<=0 || parax+this.larg >= LARGURA+1){
 
         }else{
             this.posx += this.contx
         }
         
-        if(paray<=0 || paray+this.alt >= ALTURA+1){
+        if(paray<=-3 || paray+this.alt >= ALTURA+1){
 
         }else{
             this.posy += this.conty
