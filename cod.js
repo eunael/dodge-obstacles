@@ -21,16 +21,16 @@ var bloco = {
         parax = this.posx + this.contx
         paray = this.posy + this.conty
         
-        if(parax>-1 && parax <= LARGURA-this.larg){
-            this.posx += this.contx
+        if(parax<=0 || parax+this.larg >= LARGURA){
+
         }else{
-            
+            this.posx += this.contx
         }
         
-        if(paray>-1 && paray <= ALTURA-this.alt){
-            this.posy += this.conty
+        if(paray<=0 || paray+this.alt >= ALTURA+1){
+
         }else{
-            
+            this.posy += this.conty
         }
     },
     desenBloco: function(){
