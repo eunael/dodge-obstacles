@@ -122,11 +122,13 @@ obstaculos = {
 function move(x, y){
     let x2=x, y2=y;
     if (x2==0 && y2==0 && estadoAtual == estado.play){
+        document.getElementById('instrucao').style.display = 'none'
         estadoAtual = estado.jogando
         obstaculos._obs = []
     } else if(estadoAtual == estado.jogando){
         bloco.moveBloco(x2, y2)
     } else if(x2==0 && y2==0 && estadoAtual == estado.perdeu){
+        document.getElementById('instrucao').style.display = 'block'
         estadoAtual = estado.play
         bloco.moveBloco(x2, y2)
     }
@@ -173,7 +175,7 @@ function main(){
     
     contexto = canvas.getContext("2d")
     
-    document.body.appendChild(canvas)
+    document.getElementById('div-canvas').appendChild(canvas)
     
     document.addEventListener('keypress', (event) => {
         var tecla = event.keyCode
