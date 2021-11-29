@@ -5,6 +5,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
 	<style>
+		body {
+			text-align: center;
+		}
 		canvas {
 			position: absolute;
 			top: 0px;
@@ -16,6 +19,9 @@
 	</style>
 </head>
 <body>
+	<h3 id="instrucao">Clique 'enter' para começar e use WASD para se mover</h3>
+	<div id="div-canvas">
+	</div>
 	<script>
 		let canvas, contexto, LARGURA=400, ALTURA=400, frame=0, velocidade=1, estadoAtual,
 		estado = {
@@ -136,11 +142,13 @@
 		function move(x, y){
 			let x2=x, y2=y;
 			if (x2==0 && y2==0 && estadoAtual == estado.play){
+				document.getElementById('instrucao').style.display = 'none'
 				estadoAtual = estado.jogando
 				obstaculos._obs = []
 			} else if(estadoAtual == estado.jogando){
 				bloco.moveBloco(x2, y2)
 			} else if(x2==0 && y2==0 && estadoAtual == estado.perdeu){
+				document.getElementById('instrucao').style.display = 'block'
 				estadoAtual = estado.play
 				bloco.moveBloco(x2, y2)
 			}
